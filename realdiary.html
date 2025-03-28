@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                padding: 0;
+                margin: 0;
+            }
+            .bg {
+                width: 80%;
+                height: auto;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                animation: showb 1s ease-in-out forwards;
+            }
+            @keyframes showb {
+                from {opacity: 0;}
+                to {opacity: 1;}
+            }
+            .t1 {
+                font-family: CookieRun-Regular;
+                font-size: 20px;
+                left: 80px;
+                top: 27px;
+                position: absolute;
+                width: 200px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
+            .t2 {
+                font-family: CookieRun-Regular;
+                font-size: 20px;
+                left: 80px;
+                top: 69px;
+                position: absolute;
+                width: 200px;
+            }
+            @font-face {
+                font-family: 'CookieRun-Regular';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            .predict {
+                position: absolute;
+                width: 210px;
+                height: 210px;
+                top: 200px;
+                left: 33px;
+                background-color: rgb(185, 228, 213);
+                border-radius: 8px;
+            }
+            .des {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                font-family: CookieRun-Regular;
+                font-size: 19px;
+                color: black;
+                width: 200px;
+            }
+            .x {
+                position: absolute;
+                height: 35px;
+                width: 35px;
+                opacity: 0;
+                top: 430px;
+                left: 290px;
+                cursor: pointer;
+            }
+            .hidden1 {
+                position: absolute;
+                background-color: white;
+                top: 420px;
+                left: 35px;
+                height: 300px;
+                width: 300px;
+                opacity: 0;
+                z-index: -1;
+            }
+            @keyframes fadein {
+                from {opacity: 0; z-index: 2;}
+                to{opacity: 1; z-index: 2;}
+            }
+            @keyframes fadeout {
+    from { opacity: 0; z-index: -1; }
+    to { opacity: 1; z-index: 3; }
+}
+.fade-out {
+    animation: fadeout 1s ease-in-out forwards;
+}
+            .fade-in {
+                animation: fadein 1s ease-in-out forwards;
+            }
+            .main {
+                width: 730px;
+                height: 510px;
+                position: absolute;
+                left: 405px;
+                top: 110px;
+                padding: 10px;
+                font-size: 18px;
+                font-family: CookieRun-Regular;
+                resize: none;
+                display: block;
+            }
+            .check-emotion {
+                position: absolute;
+                right: 50px;
+                bottom: 50px;
+                padding: 10px 20px;
+                font-size: 18px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .finish-bg {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: white;
+                opacity: 0;
+                z-index: -1;
+            }
+        </style>
+    </head>
+    <body>
+        <img class="bg" src="img/17.png" alt="배경화면">
+        <input class="t1" placeholder="mm/dd">
+        <input class="t2" placeholder="ex)월요일">
+        <div class="predict">
+            <p class="des">일기를 작성하면<br>감정을 알려드려요</p>
+        </div>
+        <div class="x" onclick="showel()"></div>
+        <div class="hidden1" id="appear"></div>
+        <textarea class="main" placeholder="여기에 일기를 작성해 보아요."></textarea>
+        <button class="check-emotion" onclick="analyzeEmotion()">감정 확인</button>
+        <div class = "finish-bg" id="finished"></div>
+        <script>
+            function showel() {
+                var element = document.getElementById("appear");
+                element.classList.toggle("fade-in");
+            }
+            function analyzeEmotion() {
+                var text = document.querySelector(".main").value;
+                var emotions = {
+                    '행복': ['기쁘', '기뻤', '행복', '사랑', '즐거', '좋', '감사', '축하', '재미', '희망'],
+                    '슬픔': ['눈물', '우울', '슬펐', '슬픈', '상실', '후회', '힘든', '힘들', '괴로', '외로','미안'],
+                    '화남': ['화남', '분노', '짜증', '불만', '격노', '신경질', '폭발', '격앙', '불쾌', '짜증남','화났']
+                };
+                var scores = { '행복': 0, '슬픔': 0, '화남': 0 };
+                
+                for (var emotion in emotions) {
+                    emotions[emotion].forEach(keyword => {
+                        if (text.includes(keyword)) {
+                            scores[emotion]++;
+                        }
+                    });
+                }
+                
+                var detectedEmotion = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+                var redirectPage = detectedEmotion === '행복' ? 'happy.html' : detectedEmotion === '슬픔' ? 'sad.html' : 'anger.html';
+                
+                setTimeout(() => {
+    var element = document.getElementById("finished");
+    element.classList.add("fade-out"); // 흰색 배경 활성화
+    setTimeout(() => {
+        window.location.href = redirectPage;
+    }, 1000); // 1초 후 페이지 이동
+}, 100);
+            }
+        </script>
+    </body>
+</html>

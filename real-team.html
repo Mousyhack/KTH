@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                padding: 0;
+                margin: 0;
+            }
+            .bg {
+                width: 100%;
+                height: auto;
+                top: 0;
+                left: 0;
+                position: absolute;
+                animation: enlarge 3s ease-in-out 1s ,s1 3s ease-in-out 1s, s2 3s ease-in-out 4.5s, enlarge 3s ease-in-out 4.5s, s3 3s ease-in-out 8s, enlarge 3s ease-in-out 8s, s4 3s ease-in-out 11.5s, enlarge 3s ease-in-out 11.5s, shine 1.2s ease-in-out 14.4s;
+            }
+            @keyframes enlarge {
+                0% {transform: scale(1);}
+                25% {transform: scale(2.2);}
+                75% {transform: scale(2.2);}
+                100% {transform: scale(1);}
+            }
+            @keyframes s1 {
+                0% {top: 0; left: 0px;}
+                25% {top: -60px; left:910px;}
+                75% {top: -60px; left:910px;}
+                100% {top : 0px; left: 0px;}
+            }
+            @keyframes s2 {
+                0% {top: 0; left: 0px;}
+                25% {top: -60px; left:300px;}
+                75% {top: -60px; left:300px;}
+                100% {top : 0px; left: 0px;}
+            }
+            @keyframes s3 {
+                0% {top: 0; left: 0px;}
+                25% {top: -60px; left:-300px;}
+                75% {top: -60px; left:-300px;}
+                100% {top : 0px; left: 0px;}
+            }
+            @keyframes s4 {
+                0% {top: 0; left: 0px;}
+                25% {top: -60px; left:-910px;}
+                75% {top: -60px; left:-910px;}
+                100% {top : 0px; left: 0px;}
+            }
+            @keyframes shine {
+                0% {opacity: 1;}
+                25% {opacity: 0.3;}
+                30% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+            .bg1 {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: black;
+                position: absolute;
+                animation: bg1 1s ease-in-out forwards;
+            }
+            @keyframes bg1 {
+                from {opacity: 1;}
+                to {opacity: 0;}
+            }
+            .next {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 580px;
+                font-family: CookieRun-Regular;
+                font-size: 30px;
+                color: rgb(46, 41, 16);
+                border: solid rgb(46, 41, 16) 4px;
+                padding: 7px;
+                position: absolute;
+                border-radius: 6px;
+                opacity: 0;
+                animation: next 0.6s ease-in-out forwards 16s;
+                cursor: pointer;
+                }
+                @font-face {
+    font-family: 'CookieRun-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+        }
+        @keyframes next {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        </style>
+    </head>
+    <body>
+       <img class = "bg" src="img/abouteam3.png">
+       <div class = "bg1"></div>
+       <a href = "main.html"><p class = "next">메인으로</p></a>
+       <script>
+   setTimeout(function() {
+    function autoScroll(duration = 2000) {
+        const startTime = performance.now();
+        const startY = window.scrollY;
+        const targetY = document.body.scrollHeight - window.innerHeight;
+
+        function scrollStep(timestamp) {
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            window.scrollTo(0, startY + progress * (targetY - startY));
+
+            if (progress < 1) {
+                requestAnimationFrame(scrollStep);
+            }
+        }
+
+        requestAnimationFrame(scrollStep);
+    }
+
+    autoScroll(2000); // 2초 동안 스크롤 실행
+}, 16000); // 16초 후 실행
+
+       </script>
+    </body>
+</html>

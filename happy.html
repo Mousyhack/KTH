@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .ban1 {
+                background-color: rgb(255, 255, 255);
+                width: 500px;
+                position: absolute;
+                left: 100px;
+                top: 400px;
+                height: 300px;
+            }
+           
+            .ban2 {
+                background-color: rgb(255, 255, 255);
+                width: 500px;
+                position: absolute;
+                left: 100px;
+                top: 400px;
+                height: 300px;
+                z-index: 10;
+            }
+            .b1 {
+                left: 20%;
+                position: absolute;
+                height: 200px;
+                background-color: rgb(127, 190, 234);
+                width: 80px;
+                bottom: 0;
+                animation: up 1.4s ease-in-out forwards 0.7s;
+            }
+            .b2 {
+                left: 41%;
+                position: absolute;
+                height: 40px;
+                background-color: rgb(235, 149, 149);
+                width: 80px;
+                bottom: 0;
+                animation: up 1s ease-in-out forwards 0.2s;
+            }
+            .b3 {
+                right: 20%;
+                position: absolute;
+                height: 80px;
+                background-color: rgb(238, 231, 138);
+                width: 80px;
+                bottom: 0;
+                animation: up 2s ease-in-out forwards 1.3s;
+            }
+            @keyframes up {
+                0% {bottom :0;}
+              
+                100% {bottom: 300px;}
+            }
+            .t1 {
+                font-family: CookieRun-Regular;
+                font-size: 20px;
+                position: absolute;
+                left: 24%;
+                color: black;
+                z-index: 20;
+                opacity: 0;
+                animation:fadein 1s ease-in-out forwards 1.1s;
+            }
+            .t2 {
+                font-family: CookieRun-Regular;
+                font-size: 20px;
+                position: absolute;
+                left: 45.5%;
+                color: black;
+                z-index: 20;
+                opacity: 0;
+                animation:fadein 1s ease-in-out forwards 0.8s;
+            }
+            .t3 {
+                font-family: CookieRun-Regular;
+                font-size: 20px;
+                position: absolute;
+                right: 24%;
+                color: black;
+                z-index: 20;
+                opacity: 0;
+                animation:fadein 1s ease-in-out forwards 2.3s;
+            }
+            @font-face {
+                font-family: 'CookieRun-Regular';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @keyframes fadein {
+                from {opacity: 0;}
+                to {opacity: 1;}
+            }
+            .indicate {
+                font-family: CookieRun-Regular;
+                font-size: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                position: absolute;
+                color: rgb(50, 44, 14);
+                z-index: 30;
+                width: auto;
+                text-align: center;
+                opacity: 0;
+                animation: fadein 1.8s ease-in-out forwards 4s;
+            }
+            .recommend {
+                font-family:  CookieRun-Regular;
+                font-size: 20px;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                opacity: 0;
+                animation: fadein 2s ease-in-out forwards 6s;
+                position: absolute;
+                text-align: center;
+                color: black;
+                z-index: 50;
+            }
+            .back {
+                font-family:  CookieRun-Regular;
+                font-size: 30px;
+            
+            }
+            @keyframes gone {
+    0% {opacity: 0; z-index: -20;}  /* 처음에는 보이지 않음 */
+    1% {opacity: 0; z-index: 40;}  /* 바로 위로 올라가면서 보이기 시작 */
+    100% {opacity: 1; z-index: 40;} /* 완전히 보이게 됨 */
+}
+
+.hide {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: white; /* 흰색 배경 */
+    opacity: 0;
+    z-index: -20; /* 처음에는 클릭 방해 X */
+    animation: gone 1.2s ease-in-out forwards 5.5s;
+}
+        </style>
+    </head>
+    <body>
+        <div class = "ban1">
+            <div class = "b1"></div>
+            <div class = "b2"></div>
+            <div class = "b3"></div>
+            <div class ="t1">기쁨</div>
+            <div class ="t2">화남</div>
+            <div class ="t3">슬픔</div>
+            <p class = "indicate">행복한 하루를 보냈나 봐요</p>
+        </div>
+        <div class="ban2"></div>
+        <div class = "hide"></div>
+        <p class = "recommend">그 순간을 오래 기억할 수 있도록 일기를 쓰거나 사진을 찍어 기록하세요~ <br>또 기쁨을 나누면 더욱 행복해질 수 있어요!</p>
+
+        <script>
+            setTimeout(function() {
+                window.location.href = "main.html";
+            }, 9500);
+        </script>
+    </body>
+</html>

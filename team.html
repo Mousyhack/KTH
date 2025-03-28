@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                margin: 0;
+                padding: 0;
+            }
+            @font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+            .bg {
+                background-color: rgb(0, 0, 0);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                animation: bg-1 1.4s ease-in-out, bg-2 3s ease-in-out 2.5s ;
+            }
+          
+            @keyframes bg-1 {
+                0% {opacity: 1;}
+                45% {opacity: 0.3;}
+                60% {opacity: 0.4;}
+                100% {opacity: 1;}
+            }
+            @keyframes bg-2 {
+                0% {opacity: 1;}
+                25% {opacity: 0;}
+                80% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+            .t1 {
+                font-family: SBAggroB;
+                position: absolute;
+                transform: translate(-50%,-50%);
+                font-size: 100px;
+                color: white;
+                opacity: 0;
+                animation:  t1 1.5s ease-in-out 1s;
+                left: 50%;
+                top: 50%;
+            }
+            @keyframes t1 {
+                0% {opacity: 0;}
+                40% {opacity: 1;}
+                100% {opacity: 1;}            
+            }  
+            .t2 {
+                font-family:  SBAggroB;
+                left: 70px;
+                top: 0;
+                font-size: 100px;
+                position: absolute;
+                opacity: 0;
+                color: black;
+                animation: t2 2s ease-in-out 3s;
+            } 
+            @keyframes t2 {
+                0% {opacity: 0; transform: translateY(0px);}
+                20% {opacity: 1; transform: translateY(5px);}
+                100% {opacity: 1; transform: translateY(20px);}
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class = "bg"></div>
+        <p class = "t1">저희 팀을</p>
+        <p class = "t2">소개합니다</p>
+        <script>
+             setTimeout(function() {
+                window.location.href = "real-team.html"; // 8초 후 main.html로 이동
+        }, 6000); // 8000ms = 8초
+        </script>
+    </body>
+</html>

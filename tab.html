@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottie Animation on Hover (With Text on Top)</title>
+  <style>
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    @font-face {
+      font-family: 'CookieRun-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @keyframes float-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .lottie-container {
+      opacity: 0;
+      animation: float-in 1s ease forwards;
+      transition: transform 0.5s ease;
+      cursor: pointer;
+      background-color: rgb(239, 206, 116);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 160px;
+      height: 160px;
+      position: absolute;
+    }
+
+    /* 위치 재조정 */
+    #lottie-container-1 { left: 30%; top: 23%; animation-delay: 0.2s; }
+    #lottie-container-2 { left: 57%; top: 23%; animation-delay: 0.4s; }
+    #lottie-container-3 { left: 43.5%; top: 43%; animation-delay: 0.6s; }
+
+    .lottie-container:hover {
+      transform: scale(1.3);
+    }
+
+    .lottie-text {
+  position: absolute;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(39, 30, 7);
+  font-size: 16px;
+  font-family: CookieRun-Regular;
+  opacity: 0; /* 기본적으로 숨김 */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: none;
+  text-align: center;
+  z-index: 10;
+}
+
+.lottie-container:hover .lottie-text {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+    .bg-web {
+      background-color: rgb(246, 237, 204);
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+    }
+    .target {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 800px;
+      background-color: rgb(204, 181, 86);
+      position: absolute;
+      display: none;
+      animation: up 3s ease-in-out;
+    }
+    @keyframes up {
+      0% {top: 800px;}
+      50% {top: 0px;}
+      100% {top: 0px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-web"></div>
+
+  <a href="diary.html">
+    <div id="lottie-container-1" class="lottie-container">
+      <div class="lottie-animation" id="lottie-animation-1"></div>
+      <p class="lottie-text">감정 일기장</p>
+    </div>
+  </a>
+  <a href="web_cam.html">
+    <div id="lottie-container-2" class="lottie-container">
+      <div class="lottie-animation" id="lottie-animation-2"></div>
+      <p class="lottie-text">표정 연습</p>
+    </div>
+  </a>
+ 
+    <div id="lottie-container-3" class="lottie-container" onclick="toggleTarget()">
+      <div class="lottie-animation" id="lottie-animation-3"></div>
+      <p class="lottie-text">감정 게임</p>
+    </div>
+    <div class = "target"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+  <script>
+    const containers = [
+      { animId: 'lottie-animation-1', path: './animaition/opt1.json' },
+      { animId: 'lottie-animation-2', path: './animaition/opt4.json' },
+      { animId: 'lottie-animation-3', path: './animaition/opt3.json' }
+    ];
+
+    containers.forEach((item) => {
+      const animationContainer = document.getElementById(item.animId);
+      const parentContainer = animationContainer.parentElement;
+      const animation = lottie.loadAnimation({
+        container: animationContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: false,
+        path: item.path
+      });
+
+      parentContainer.addEventListener('mouseenter', () => {
+        animation.play();
+      });
+
+      parentContainer.addEventListener('mouseleave', () => {
+        animation.stop();
+      });
+    });
+
+    function toggleTarget() {
+      var target = document.querySelector(".target"); // 클래스 선택
+            if (target.style.display === "none" || target.style.display === "") {
+                target.style.display = "block";
+                setTimeout(function() {
+                  window.location.href = "tab-game.html";
+                }, 1400);
+            } else {
+                target.style.display = "none";
+            }
+        }
+  </script>
+</body>
+</html>

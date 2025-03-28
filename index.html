@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                margin: 0;
+                padding: 0;
+            }
+            @font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+            .bg {
+                background-color: rgb(0, 0, 0);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+               
+                animation: bg-1 1.4s ease-in-out, bg-2 3s ease-in-out 2.5s ;
+            }
+            .t1 {
+                font-family: SBAggroB;
+                font-size: 50px;
+                left: 43%;
+                z-index: 1;
+                top: 300px;
+                color: rgb(255, 255, 255);
+                position: absolute;
+                opacity: 0;
+                animation: t-1 2.5s ease-in-out 1s;
+            }
+            @keyframes t-1{
+                from {opacity: 0;transform: scale(1.2);}
+                to {opacity: 1;transform: scale(1.3) ;}
+            }
+            .t2 {
+                font-family: SBAggroB;
+                font-size: 80px;
+                position: absolute;
+                color: black;
+                opacity: 0;
+                animation: t-2 5s ease-in-out 3s;
+                z-index: 1;
+            }
+            @keyframes t-2 {
+            0% {opacity: 0; transform: translateY(20px) ;}
+            20% {opacity: 1; transform: translateY(33px) ;}
+            100%{opacity: 1; transform: translateY(50px) ;}
+            }
+            .bg {
+                background-color: rgb(0, 0, 0);
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-size: cover;
+                animation: bg-1 1.4s ease-in-out, bg-2 3s ease-in-out 2.5s ;
+            }
+            @keyframes bg-1 {
+                0% {opacity: 1;}
+                45% {opacity: 0.3;}
+                60% {opacity: 0.4;}
+                100% {opacity: 1;}
+            }
+            @keyframes bg-2 {
+                0% {opacity: 1;}
+                25% {opacity: 0;}
+                80% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+            .t3 {
+                font-family: SBAggroB;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 170px;
+                font-size: 120px;
+                animation: t-3 3s ease-in-out forwards   5.5s ;
+                opacity: 0;
+                color: white;
+                position: absolute;
+                z-index: 1;
+            }
+            @keyframes t-3 {
+                0% {opacity: 0; transform: translateY(0px)translateX(-50%);}
+                30% {opacity: 1; transform: translateY(-40px)translateX(-50%);}
+                100% {opacity: 1; transform: translateY(-40px)translateX(-50%);}
+            }
+            .bg2 {
+                background-color: rgb(19, 34, 48);
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 20;
+                animation: bg2 2.1s ease-in-out forwards 8s;
+            }
+            @keyframes bg2 {
+                from {opacity: 0;}
+                to {opacity: 1;}
+            }
+            .logo1 {
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                z-index: 20;
+                opacity: 0;
+               animation: bg2 2.1s ease-in-out forwards 8.4s, sizeup 2.1s ease-in-out forwards 8.4s;
+                position: absolute;
+                width: 400px;
+                height: auto;
+            }
+            @keyframes sizeup {
+                from { transform: translate(-50%,-50%) scale(1);}
+                to { transform: translate(-50%,-50%) scale(1.1);}
+            }
+        </style>
+
+        <div class = "bg"></div>
+        <p class = "t1">감정 표현</p>
+        <p class = "t2">이제 어렵지 않아요</p>
+        <p class = "t3">같이 배워가요</p>
+        <div class = "wall"></div>
+        <div class="bg2"></div>
+        <img class="logo1" src="img/logo2.png" alt="로고 화면">
+       
+        
+    </head>
+
+    <body>
+     <script>
+        setTimeout(function() {
+           window.location.href = "main.html";
+        }, 12500);
+     </script>
+    </body>
+</html>

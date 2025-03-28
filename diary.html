@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .bg {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                background-size: cover;
+                z-index: -1;
+                top: 0;
+                left: 0;
+            }
+            .d1, .d2, .d3, .d4 {
+                width: 200px;
+                height: auto;
+                position: absolute;
+                top: 250px;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+            .d1 { left: 100px; }
+            .d2 { left: 480px; }
+            .d3 { left: 860px; }
+            .d4 { left: 1200px; }
+
+            .d1:hover, .d2:hover, .d3:hover, .d4:hover {
+                transform: scale(1.2);
+            }
+
+            .intro {
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                background-color: rgb(231, 191, 122);
+                z-index: 10;
+                animation: fadeout-bg 1.2s ease-in-out forwards;
+            }
+
+            @keyframes fadeout-bg {
+                0% {opacity: 1; z-index: 10;}
+                99% {opacity: 0.01; z-index: 10;}
+                100% {opacity: 0; z-index: -10;}
+            }
+
+            /* 클릭한 요소 애니메이션 */
+            .animate {
+                position: fixed !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) scale(2);
+                transition: all 2s ease-in-out;
+            }
+
+            /* whitebanner 스타일 */
+            .whitebanner {
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                z-index: -20;
+                transition: opacity 2s ease-in-out;
+            }
+            .show {
+                opacity: 1;
+                z-index: 50;
+            }
+        </style>
+    </head>
+    <body>
+        <img class="d1" src="img/diaryelement.png" alt="요소1" onclick="animateAndGo(this)">
+        <img class="d2" src="img/diaryelement.png" alt="요소2" onclick="animateAndGo(this)">
+        <img class="d3" src="img/diaryelement.png" alt="요소3" onclick="animateAndGo(this)">
+        <img class="d4" src="img/diaryelement.png" alt="요소4" onclick="animateAndGo(this)">
+        
+        <img class="bg" src="img/backgrounddiary.png" alt="배경화면">
+        <div class="intro"></div>
+
+        <!-- 등장할 whitebanner -->
+        <div class="whitebanner"></div>
+
+        <script>
+            function animateAndGo(element) {
+                // 클릭한 요소에 애니메이션 적용
+                element.classList.add("animate");
+
+                // whitebanner 요소 선택 후 show 클래스 추가
+                document.querySelector(".whitebanner").classList.add("show");
+
+                // 2초 후 realdiary.html 로 이동
+                setTimeout(() => {
+                    window.location.href = "realdiary.html";
+                }, 2000);
+            }
+        </script>
+    </body>
+</html>

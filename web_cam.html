@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 표정 분석기</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Webcam.js & ML5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+    <style>
+        p {
+            font-family: CookieRun-Regular;
+        }
+        body {
+            color: white;
+            background: #f8f5de;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .camera-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        #camera, #result {
+            border: 2px dashed black;
+            width: 350px;
+            height: 300px;
+        }
+
+        .emotion_name {
+            font-size: 30px;
+            color: black;
+        }
+
+        .emoji {
+            font-size: 48px;
+        }
+
+        .task-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: black;
+            background: rgb(229, 240, 200);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        @font-face {
+            font-family: 'CookieRun-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        .t1 {
+            font-family: CookieRun-Regular;
+            font-size: 25px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0px;
+            color: rgb(38, 34, 10);
+        }
+        .to-main {
+            right: 40px;
+            font-family: CookieRun-Regular;
+            font-size: 30px;
+            bottom: 10%;
+            background-color: rgb(220, 205, 116);
+            color: rgb(21, 19, 5);
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .to-main:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+            background-color: rgb(21, 19, 5);
+            color: rgb(232, 226, 194);
+        }
+        .l {
+            font-family: CookieRun-Regular;
+            font-size: 30px;
+            color: rgb(29, 26, 10);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="main.html"><p class="to-main">메인으로</p></a>
+    <p id="taskText" class="task-text"></p>
+    <div class="container">
+        <div class="camera-container">
+            <div>
+                <p class="t1">나의 표정</p>
+                <div id="camera"></div>
+            </div>
+
+            <div>
+                <p class="t1">분석한 표정</p>
+                <div id="result"></div>
+            </div>
+        </div>
+
+        <button class="btn btn-warning" onclick="take_snapshot();">표정 캡쳐하기</button>
+
+        <div class="results-container">
+            <div class="emotion-box">
+                <label class = "l">현재 표정은</label>
+                <p class="emotion_name" id="result_emotion_name"></p>
+                <p class="emoji" id="update_emoji"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let fakeResults = ["sad", "happy", "angry", "sad"];
+        let resultIndex = 0;
+        let tasks = [
+            { text: "행복한 표정을 지어봐요", emotion: "happy" },
+            { text: "행복한 표정을 지어봐요", emotion: "happy" },
+            { text: "화난 표정을 지어봐요", emotion: "angry" },
+            { text: "슬픈 표정을 지어봐요", emotion: "sad" }
+        ];
+        let currentTaskIndex = 0;
+        
+        function updateTask() {
+            document.getElementById("taskText").innerText = tasks[currentTaskIndex].text;
+            currentTaskIndex = (currentTaskIndex + 1) % tasks.length;
+        }
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            Webcam.set({
+                width: 350,
+                height: 300,
+                image_format: 'png',
+                png_quality: 90
+            });
+            Webcam.attach('#camera');
+            updateTask();
+        });
+
+        function take_snapshot() {
+            Webcam.snap(function (data_uri) {
+                document.getElementById("result").innerHTML = `<img id="captured_image" src="${data_uri}"/>`;
+                setTimeout(showFakeResult, 500);
+            });
+        }
+
+        function showFakeResult() {
+            let prediction = fakeResults[resultIndex];
+            resultIndex = (resultIndex + 1) % fakeResults.length;
+
+            let emojiMap = {
+                "happy": { text: "기뻐요", emoji: "😊" },
+                "sad": { text: "슬퍼요", emoji: "😢" },
+                "angry": { text: "화나요", emoji: "😡" }
+            };
+            
+            document.getElementById("result_emotion_name").innerHTML = emojiMap[prediction].text;
+            document.getElementById("update_emoji").innerHTML = emojiMap[prediction].emoji;
+            
+            updateTask();
+        }
+    </script>
+</body>
+</html>

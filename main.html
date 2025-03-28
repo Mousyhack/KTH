@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <style>
+            p{
+                margin: 0;
+                padding: 0;
+            }
+            .banner1 {
+                background-color: rgb(192, 232, 242);
+                position: absolute;
+                width: 100%;
+                height: 80px;
+                top: 0;
+                left: 0;
+               
+            }
+            .banner2 {
+                background-color: rgb(133, 196, 238);
+                position: absolute;
+                top: 80px;
+                left: 0;
+                height: 70px;
+                width: 600px;
+               border-bottom-right-radius: 30px;
+               opacity: 0;
+               animation: fadein 0.7s ease-in-out forwards;
+            }
+            .banner3 {
+                background-color: rgb(80, 151, 199);
+                position: absolute;
+                top: 150px;
+                left: 0;
+                height: 70px;
+                width: 400px;
+               border-bottom-right-radius: 30px;
+               opacity: 0;
+               animation: fadein 1s ease-in-out forwards;
+               animation-delay: 0.7s;
+            }
+            @keyframes fadein {
+                from{opacity: 0; transform: translateY(20px);}
+                to {opacity: 1; transform: translateY(0);}
+                
+            }
+        .bg {
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            animation: bg-fadein 0.5s ease-in-out forwards;
+        }
+        @keyframes bg-fadein {
+            from{opacity: 0;  top: 0;left:0;}
+            to {opacity: 1;  top: 0;left:0; transform: translateX(0);}
+        }
+        .login{
+            left: 87%;
+            font-size: 30px;
+            font-family: Paperlogy-8ExtraBold;
+            position: absolute;
+            top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: rgb(3, 3, 40);
+        }
+        .login:hover{
+            font-size: 35px;
+            text-decoration: underline;
+        }
+        @font-face {
+    font-family: 'CookieRun-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* 투명한 검정 */
+            z-index: 5;
+            display: none; /* 처음엔 안 보임 */
+        }
+        .show {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+           height: 600px;
+           width: 420px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 10;
+            display: none;
+        }
+        .show-banner {
+            background-color: rgba(161, 218, 244, 0.982);
+            height: 90%; /* 필요에 맞게 조절 */
+            width: 90%; /* 필요에 맞게 조절 */
+            object-position: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px; /* 모서리 둥글게 (선택) */
+            opacity: 0.8;
+        }
+        .close {
+            top: 80%;
+            left: 70%;
+            font-family: CookieRun-Regular;
+            font-size: 25px;
+            border: solid rgb(209, 68, 68) 5px;
+            border-radius: 5px;
+            padding: 2px;
+            padding-left: 12px;
+            padding-right: 12px;
+            position: absolute;
+            color: rgb(209, 68, 68);
+            background-color: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: real-fadein 0.5s ease-in-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+        .enter {
+            top: 80%;
+            left: 12%;
+            font-family: CookieRun-Regular;
+            font-size: 25px;
+            border: solid rgb(97, 153, 214) 5px;
+            border-radius: 5px;
+            padding: 2px;
+            padding-left: 70px;
+            padding-right: 70px;
+            position: absolute;
+            color: rgb(97, 153, 214);
+            background-color: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: real-fadein 0.5s ease-in forwards;
+            opacity: 0;
+        }
+        @keyframes real-fadein {
+            from {opacity: 0;}
+            to{opacity: 1;}
+        }
+        .enter:hover{
+            font-size: 27px;
+            background-color: rgb(97, 153, 214);
+            color: white;
+            opacity: 0.8;
+        }
+        .enter:active{
+            opacity: 0.6;
+        }
+        .close:hover{
+            font-size: 30px;
+            background-color: rgb(209, 68, 68);
+            color: white;
+            opacity: 0.8;
+        }
+        .close:active{
+            opacity: 0.6;
+        }
+        .enter-e {
+            left: 50%;
+            top: 10%;
+            height: 40px;
+            width: 80%;
+            transform: translateX(-50%);
+            font-size: 25px;
+            font-family: CookieRun-Regular;
+            position: absolute;
+            border-radius: 6px;
+            animation: real-fadein 1s;
+        }
+        .enter-p {
+            left: 50%;
+            top: 22%;
+            height: 40px;
+            width: 80%;
+            transform: translateX(-50%);
+            font-size: 25px;
+            font-family: CookieRun-Regular;
+            position: absolute;
+            border-radius: 6px;
+            animation: real-fadein 1s ease-in-out forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        .info-account {
+            font-family: CookieRun-Regular;
+            font-size: 21px;
+            left: 13%;
+            top: 40%;
+            color: black;
+            position: absolute;
+            animation: real-fadein 1s ease-in-out forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        .make-account {
+            font-family: CookieRun-Regular;
+            font-size: 20px;
+            left: 13.4%;
+            top: 47%;
+            color: rgb(36, 65, 153);
+            position: absolute;
+            animation: real-fadein 1s ease-in-out forwards;
+            opacity: 0;
+            animation-delay: 1s;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: 0.2s;
+        }
+        .make-account:hover {
+            font-size: 25px;
+            opacity: 0.8;
+        }
+        .team {
+            left: 80%;
+            font-family: Paperlogy-8ExtraBold;
+            font-size: 20px;
+            text-align: center;
+            color: rgb(56, 92, 199);
+            position: absolute;
+            top: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .team:hover {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(34, 56, 123);
+        }
+        .site {
+            left: 71%;
+            font-family: Paperlogy-8ExtraBold;
+            font-size: 20px;
+            text-align: center;
+            color: rgb(56, 92, 199);
+            position: absolute;
+            top: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .site:hover {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(34, 56, 123);
+        }
+        @font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+        </style>
+        <div class = "banner1">
+            <p class = "login" onclick="openlog()">로그인</p>
+            <a href="team.html"><p class = "team">팀 소개</p></a>
+            <a href="about.html"><p class = "site">사이트 소개</p></a>
+        </div>
+        <div class = "banner2"></div>
+        <div class = "banner3"></div>
+        <img class = "bg" src="img/bg-blue.avif">
+        <div class = "overlay" ></div>
+        <div class = "show">
+            <div class = "show-banner"></div>
+            <div class = "close" onclick="closelog()">취소</div>
+            <div class = "enter">로그인</div>
+            <input class = "enter-e" placeholder="이메일을 입력하세요">
+            <input class = "enter-p" placeholder="비밀번호를 입력하세요">
+            <div class = "info-account">계정이 없나요?</div>
+            <div class = "make-account">회원가입</div>
+        </div>
+   </head>
+
+   <body>
+        <style>
+            .bg2 {
+                background-color: #E7F5FE;
+                top: 100%;
+               height: 500px;
+               width: 100%;
+               left: 0;
+               position: absolute;
+               z-index: -1; 
+            }
+            .move-img {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 200px;
+                width: 870px;
+                height: 440px;
+                overflow: hidden;
+                position: absolute;
+                z-index: -1;
+                display: flex;
+                border-radius: 12px;
+                opacity: 0;
+                animation: real-fadein 1s ease-in-out forwards;
+                animation-delay: 0.5s;
+            }
+            .imgs {
+    opacity: 0;
+    width: 100%;
+    height: 100%; /* 높이 꽉 채우기 */
+    object-fit: cover;
+    object-position: center;
+    position: absolute; /* 겹치게 */
+    transition: opacity 1.5s ease-in-out; /* 자연스러운 전환 */
+    border-radius: 12px;
+}
+.imgs.active {
+    opacity: 1; /* 활성화된 이미지만 보이기 */
+}
+    .border {
+        border: solid rgb(96, 171, 250) 5px;
+        border-radius: 3px;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        object-fit: cover;
+        position: absolute;
+        box-sizing: border-box; /* 중요: border 포함 크기 */
+        pointer-events: none; /* 클릭 방해 안 되게 */
+        opacity: 0.6;
+    }
+    .start {
+        top: 710px;
+        font-family: CookieRun-Regular;
+        font-size: 40px;
+        padding: 7px;
+        padding-left: 50px;
+        padding-right: 50px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        border: solid rgb(57, 93, 167) 6px;
+        border-radius: 6px;
+        background-color: transparent;
+        color: rgb(57, 93, 167);
+        cursor: pointer;
+        transition: 0.3s;
+        animation: bounce 2s ease-in-out infinite;
+    
+    }
+    .start:hover{
+        font-size: 45px;
+        background-color: rgb(57, 93, 167);
+        color: white;
+    }
+    @keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) translateX(-50%); /* 원위치 */
+    }
+    50% {
+        transform: translateY(-20px) translateX(-50%); /* 위로 20px */
+    }
+}
+
+  </style>
+            <div class = "bg2"></div>
+            <div class="move-img">
+                <img src="img/1.png" class="imgs" alt="a1">
+                <img src="img/2.png" class="imgs" alt="a2">
+                <img src="img/3.png" class="imgs" alt="a3">
+                <img src="img/4.png" class="imgs" alt="a4">
+                <div class = "border"></div>
+            </div>
+            <a href="tab.html"><p class = "start">시작하기</p></a>
+
+            <style>
+                .banner4 {
+                    top:1000px;
+                    width: 100%;
+                    height: 300px;
+                    background-color: rgb(114, 150, 213);
+                    position: absolute;
+                    left: 0;
+                }
+                .banner5 {
+                    top : 960px;     
+                    width: 500px;
+                    height: 100px;
+                    left: 0%;
+                    position: absolute;
+                    background-color: rgb(114, 150, 213);
+                    border-top-right-radius: 10px;
+                }
+                .info {
+                    top : 1050px;
+                    width: 300px;
+                    height: 200px;
+                    position: absolute;
+                    left: 5%;
+                }
+                .t1 {
+                    font-family: Paperlogy-8ExtraBold;
+                    font-size: 25px;
+                    margin-bottom: 30px;
+                    text-decoration: none;
+                    color: rgb(7, 16, 39);
+                    transition: 0.2s;
+                }
+                .t1:hover {
+                    font-size: 30px;
+                }
+                .t2 {
+                    font-family: Paperlogy-8ExtraBold;
+                    font-size: 25px;
+                    margin-bottom: 30px;
+                    text-decoration: none;
+                    color: rgb(7, 16, 39);
+                    transition: 0.2s;
+                }
+                .t2:hover {
+                    font-size: 30px;
+                }
+                .t3 {
+                    font-family: Paperlogy-8ExtraBold;
+                    font-size: 25px;
+                    margin-bottom: 30px;
+                    text-decoration: none;
+                    color: rgb(7, 16, 39);
+                    transition: 0.2s;
+                }
+                .t3:hover {
+                    font-size: 30px;
+                }
+                .banner6 {
+                    top:990px;
+                    background-color: rgb(168, 196, 228);
+                    width: 270px;
+                    position: absolute;
+                    height: 310px;
+                    
+                    border-radius: 9px;
+                }
+                .banner7 {
+                    top:1070px;
+                    background-color:rgb(168, 196, 228) ;
+                    width: 100%;
+                    height: 230px;
+                    position: absolute;
+                }
+                .logo {
+                    background-color: rgba(19,34,48,255);
+                    width: 60px;
+                    height: 60px;
+                    position: absolute;
+                    object-fit: contain;
+                    object-position: center;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    border-radius: 6px;
+                    z-index: 1;
+                    opacity: 0;
+                    animation: real-fadein 1.2s ease-in-out forwards 2s , logo2 1.2s ease-in-out forwards 4s;
+                 
+                }
+                @keyframes logo2 {
+                    from {width: 60px; height: 60px;}
+                    to {width: 30px; height: 30px;}
+                }
+                .ban-logo {
+                    width: 130px;
+                    height: 60px;
+                    background-color: rgba(19,34,48,255);
+                    position: absolute;
+                    border-radius: 6px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    opacity: 0;
+                    animation: real-fadein 1s ease-in-out forwards 2s, logo1 1.2s ease-in-out forwards 4s;
+                   object-position: center;
+                }
+                @keyframes logo1 {
+                    from {width: 130px; height: 60px;}
+                    to {width: 80px; height: 30px;}
+                }
+                .p1 {
+                    font-family: CookieRun-Regular;
+                    font-size: 25px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    position: absolute;
+                    top: 45px;
+                    color: rgb(12, 30, 73);
+                   -webkit-text-stroke: black 1px;
+                   opacity: 0;
+                   animation: show1 2.3s ease-in-out forwards 6.3s;
+                }
+                @keyframes show1 {
+                    0% {opacity: 0;}
+                    50% {opacity: 1;}
+                    60% {opacity: 0;}
+                    100% {opacity: 1;}
+                }
+
+            </style>
+            <p class="p1">your emotion, your power</p>
+            <div class = "banner4"></div>
+            <div class = "banner5"></div>
+            <div class="banner6"></div>
+            <div class = "banner7"></div>
+            <div class = "info">
+                <a href="team.html" class = "t1"><p  class = "t1">팀 소개</p></a>
+                <a href="about.html" class = "t2"><p  class = "t2">사이트 소개</p></a>
+                <a href="tab.html"  class = "t3"><p  class = "t3">시작하기</p></a>
+            </div>
+            <div class = "logo">
+                <img class = "logo" src="img/logo2.png">
+            </div>
+            <div class = "ban-logo"></div>
+            
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const images = document.querySelectorAll('.imgs');
+let current = 0;
+
+function showNextImage() {
+    // 모든 이미지 숨기기
+    images.forEach(img => img.classList.remove('active'));
+
+    // 현재 이미지 보이기
+    images[current].classList.add('active');
+
+    // 다음 이미지로 넘어가기 (반복)
+    current = (current + 1) % images.length;
+}
+
+// 첫 이미지 보이기
+showNextImage();
+
+// 3초마다 전환
+setInterval(showNextImage, 5000);
+
+    </script>
+
+<body>
+
+  
+
+
+      
+    </body>
+
+</html>
+<script>
+   
+    function openlog() {
+        document.querySelector('.show').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+    }
+    function closelog() {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.show').style.display = 'none';
+    }
+</script>
+<script>
+    let isLoginMode = true; // 현재 모드 상태 (로그인/회원가입)
+    let accounts = JSON.parse(localStorage.getItem('accounts')) || []; // 저장된 계정 불러오기
+
+    function openlog() {
+        document.querySelector('.show').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+        switchToLogin(); // 기본은 로그인 모드
+    }
+
+    function closelog() {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.show').style.display = 'none';
+    }
+
+    // 모드 전환: 로그인
+    function switchToLogin() {
+        isLoginMode = true;
+        document.querySelector('.enter').innerText = '로그인';
+        document.querySelector('.info-account').innerText = '계정이 없나요?';
+        document.querySelector('.make-account').innerText = '회원가입';
+    }
+
+    // 모드 전환: 회원가입
+    function switchToRegister() {
+        isLoginMode = false;
+        document.querySelector('.enter').innerText = '회원가입';
+        document.querySelector('.info-account').innerText = '이미 계정이 있나요?';
+        document.querySelector('.make-account').innerText = '로그인';
+    }
+
+    // 회원가입 또는 로그인 버튼 클릭 시
+    document.querySelector('.enter').addEventListener('click', function() {
+        const email = document.querySelector('.enter-e').value.trim();
+        const password = document.querySelector('.enter-p').value.trim();
+
+        if (!email || !password) {
+            alert('이메일과 비밀번호를 입력하세요.');
+            return;
+        }
+
+        if (isLoginMode) {
+            // 로그인 로직
+            const user = accounts.find(acc => acc.email === email && acc.password === password);
+            if (user) {
+                alert(`${user.email}님, 환영합니다!`);
+                closelog(); // 로그인 성공 시 팝업 닫기
+            } else {
+                alert('이메일 또는 비밀번호가 잘못되었습니다.');
+            }
+        } else {
+            // 회원가입 로직
+            const exists = accounts.some(acc => acc.email === email);
+            if (exists) {
+                alert('이미 존재하는 이메일입니다.');
+                return;
+            }
+            // 계정 저장
+            accounts.push({ email, password });
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            alert('회원가입이 완료되었습니다. 로그인 해주세요.');
+            switchToLogin(); // 회원가입 후 로그인 모드로
+        }
+    });
+
+    // 회원가입/로그인 전환 클릭
+    document.querySelector('.make-account').addEventListener('click', function() {
+        if (isLoginMode) {
+            switchToRegister();
+        } else {
+            switchToLogin();
+        }
+    });
+</script>
+
